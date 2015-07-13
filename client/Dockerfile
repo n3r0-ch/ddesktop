@@ -12,7 +12,7 @@ RUN apt-get install -y sudo net-tools lxde gtk2-engines-murrine \
 	ttf-ubuntu-font-family fonts-wqy-microhei lxterminal \ 
 	x11vnc Xvfb supervisor pwgen websockify curl less nano wget \ 
 	unzip firefox libreoffice retext evince gimp gimp-data \ 
-	gimp-plugin-registry gimp-data-extras filezilla
+	gimp-plugin-registry gimp-data-extras filezilla chromium-browser
 
 #Create ubuntu user
 RUN useradd --create-home --shell /bin/bash --user-group --groups adm,sudo ubuntu
