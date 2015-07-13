@@ -1,7 +1,7 @@
 server:
   port:
-    http: 10080
-    https: 10443
+    http: 80
+    https: 443
 
 container:
   image: n3r0ch/ddesktop-client
