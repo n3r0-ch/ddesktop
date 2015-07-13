@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ddesktop">
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>.ddesktop</title>
+
+    <!-- include css -->
+    <link href="static/bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/bower/bootstrap-flat/css/bootstrap-flat.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div ng-include src="'/static/includes/navigation.html'"></div>
+
+    <div class="container">
+      <div ng-view></div>
+    </div>
+
+
+    <!-- include javascripts -->
+    <script src="static/bower/jquery/dist/jquery.min.js"></script>
+    <script src="static/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/bower/angular/angular.min.js"></script>
+    <script src="static/bower/angular-resource/angular-resource.min.js"></script>
+    <script src="static/bower/angular-route/angular-route.min.js"></script>
+    <script src="static/bower/angular-no-vnc/dist/angular-noVNC.js"></script>
+    <script src="static/js/app/app.js"></script>
+    <script src="static/js/controller/ConnectController.js"></script>
+    <script src="static/js/controller/LoginController.js"></script>
+    <script src="static/js/controller/SessionListController.js"></script>
+    <script src="static/js/controller/ErrorController.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+/bin/*
+/pkg/*
+/src/ddesktop/webroot/static/bower/*
+/src/github.com/gorilla/*
+.DS_Store

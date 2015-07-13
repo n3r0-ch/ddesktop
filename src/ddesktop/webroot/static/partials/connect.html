@@ -1,0 +1,17 @@
+<center>
+	<vnc host="localhost" port="6080" is-connected="true" id="vnc" data:states="states" data:ng-init = "states=[];"></vnc>
+</center>
+
+<div data:ng-repeat="state in states">
+	<div ng-show="state.status == 'disconnected'">
+		<h3>Connection closed</h3>
+		<p>
+			<a class="btn btn-primary" ng-Click="reconnect()">Reconnect</a>
+		</p>
+		<hr>
+		<h4>Connection Log</h4>
+		<ul data:ng-repeat="state in states">
+			<li>{{ state.status }}: {{state.msg}}</li>
+		</ul>
+	</div>
+</div>
