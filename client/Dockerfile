@@ -15,7 +15,7 @@ RUN apt-get install -y sudo net-tools lxde gtk2-engines-murrine \
 	gimp-plugin-registry gimp-data-extras filezilla chromium-browser
 
 #Create ubuntu user
-RUN useradd --create-home --shell /bin/bash --user-group --groups adm,sudo ubuntu
+RUN useradd --create-home --shell /bin/bash --user-group ubuntu
 
 #Add supervisor config
 ADD files/supervisor /etc/supervisor/conf.d
