@@ -1,5 +1,6 @@
 /bin/*
 /pkg/*
 /src/ddesktop/webroot/static/bower/*
-/src/github.com/gorilla/*
+/src/github.com/*
+/src/gopkg.in/*
 .DS_Store

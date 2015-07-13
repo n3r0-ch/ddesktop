@@ -19,4 +19,5 @@ deps-frontend:
 	bower install
 
 dev: backend frontend
+	cp config.yml bin
 	cd bin && ./ddesktop

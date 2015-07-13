@@ -1,5 +1,5 @@
 <center>
-	<vnc host="localhost" port="9000" is-connected="true" id="vnc" data:states="states" data:ng-init = "states=[];"></vnc>
+	<vnc host="{{ host }}" port="{{ port }}" is-connected="true" id="vnc" data:states="states" data:ng-init = "states=[];"></vnc>
 </center>
 
 <div data:ng-repeat="state in states">

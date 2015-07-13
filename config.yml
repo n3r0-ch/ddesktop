@@ -1,0 +1,5 @@
+server:
+  port: 9000
+
+image:
+  name: n3r0ch/ddesktop-min
