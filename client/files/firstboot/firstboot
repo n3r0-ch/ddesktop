@@ -1,9 +1,0 @@
-#/bin/bash
-if [ -f /etc/firstboot ];
-then
-   exit
-fi
-
-date > /etc/firstboot
-echo "Run content of /bin/firstboot..."
-
