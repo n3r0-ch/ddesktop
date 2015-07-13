@@ -5,11 +5,18 @@ import (
 	"net"
 	"log"
 	"io"
+	"ddesktop/dockerhandler"
 )
 
 
-func WsProxy(target string) http.Handler {
+func WsProxy() http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+    	log.Println("WebSocket connection opened.")
+
+    	containerId := dockerhandler.StartContainer()
+    	log.Println("IP: " + dockerhandler.GetIP(containerId))
+
+    	target := "localhost:6080"
 		d, err := net.Dial("tcp", target)
 		if err != nil {
 			http.Error(w, "Error contacting backend server.", 500)
@@ -42,6 +49,8 @@ func WsProxy(target string) http.Handler {
 		}
 		go cp(d, nc)
 		go cp(nc, d)
-		<-errc  
+		<-errc
+		log.Println("WebSocket connection closed.")
+		dockerhandler.DeleteContainer(containerId)
 	})
 }

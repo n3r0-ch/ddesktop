@@ -37,7 +37,7 @@ func main() {
 	log.Printf("Starting server on http://0.0.0.0:" + viper.GetString("server.port") + "...")
 	r := server.NewRouter()
 	http.Handle("/static/", server.HTTPProvider(http.StripPrefix("/static/", http.FileServer(http.Dir("webroot/static/"))), "GetStatic"))
-	http.Handle("/websockify", wsproxy.WsProxy("localhost:6080"))
+	http.Handle("/websockify", wsproxy.WsProxy())
 	http.Handle("/", r)
 
 	log.Fatal(http.ListenAndServe(":" + viper.GetString("server.port"), nil))
