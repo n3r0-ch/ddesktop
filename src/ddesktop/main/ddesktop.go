@@ -20,6 +20,7 @@ func main() {
 	viper.SetDefault("server.port", "9000")
 	viper.SetDefault("container.image", "n3r0ch/ddesktop-min")
 	viper.SetDefault("container.prefix", "dd--")
+	viper.SetDefault("container.wsport", "6080")
 
 	//Read config
 	err := viper.ReadInConfig()

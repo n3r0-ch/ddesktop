@@ -1,8 +1,10 @@
 package wsproxy
 
 import (
+	"github.com/spf13/viper"
 	"net/http"
 	"net"
+	"time"
 	"log"
 	"io"
 	"ddesktop/dockerhandler"
@@ -14,9 +16,21 @@ func WsProxy() http.Handler {
     	log.Println("WebSocket connection opened.")
 
     	containerId := dockerhandler.StartContainer()
-    	log.Println("IP: " + dockerhandler.GetIP(containerId))
 
-    	target := "localhost:6080"
+    	target := dockerhandler.GetIP(containerId) + ":" + viper.GetString("container.wsport")
+
+    	//Check if port is open
+    	for i := 0; i < 10; i++ {
+    		d, err := net.Dial("tcp", target)
+    		if err != nil {
+    			time.Sleep(1000 * time.Millisecond)
+    		} else{
+    			d.Close()
+    			time.Sleep(3000 * time.Millisecond)
+    			break;
+    		}
+    	}
+
 		d, err := net.Dial("tcp", target)
 		if err != nil {
 			http.Error(w, "Error contacting backend server.", 500)

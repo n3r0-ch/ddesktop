@@ -4,3 +4,4 @@ server:
 container:
   image: n3r0ch/ddesktop-min
   prefix: dd--
+  wsport: 6080
