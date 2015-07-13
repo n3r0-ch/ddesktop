@@ -1,7 +1,13 @@
 server:
-  port: 9000
+  port:
+    http: 10080
+    https: 10443
 
 container:
-  image: n3r0ch/ddesktop-min
+  image: n3r0ch/ddesktop-client
   prefix: dd--
   wsport: 6080
+
+ssl:
+  cert: /etc/ddesktop/cert.pem
+  key: /etc/ddesktop/key.pem

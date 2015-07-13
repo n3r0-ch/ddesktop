@@ -20,4 +20,4 @@ deps-frontend:
 
 dev: backend frontend
 	cp config.yml bin
-	cd bin && ./ddesktop
+	cd bin && sudo ./ddesktop

@@ -7,26 +7,26 @@ import (
 	"ddesktop/wsproxy"
 	"ddesktop/dockerhandler"
 	"net/http"
+	"os"
 )
 
 func main() {
 
+	pwd, _ := os.Getwd()
+
 	//Set config path and type
 	viper.SetConfigName("config")
+	viper.AddConfigPath(pwd)
 	viper.AddConfigPath("/etc/ddesktop/")
 	viper.SetConfigType("yaml")
-
-	//Set config defaults
-	viper.SetDefault("server.port", "9000")
-	viper.SetDefault("container.image", "n3r0ch/ddesktop-min")
-	viper.SetDefault("container.prefix", "dd--")
-	viper.SetDefault("container.wsport", "6080")
 
 	//Read config
 	err := viper.ReadInConfig()
 	if err != nil { 
 	    log.Fatalln(err)
 	}
+
+	log.Println(viper.GetString("container.prefix"))
 
 	//Cleanup existing containers
 	dockerhandler.CleanUp()
@@ -35,11 +35,19 @@ func main() {
 	dockerhandler.PullImage()
 
 	//Start server
-	log.Printf("Starting server on http://0.0.0.0:" + viper.GetString("server.port") + "...")
+	log.Printf("Starting server on http://0.0.0.0:" + viper.GetString("server.port.http") + " and https://0.0.0.0:" + viper.GetString("server.port.https") + "...")
 	r := server.NewRouter()
-	http.Handle("/static/", server.HTTPProvider(http.StripPrefix("/static/", http.FileServer(http.Dir("webroot/static/"))), "GetStatic"))
+	http.Handle("/static/", server.CacheProvider(server.HTTPProvider(http.StripPrefix("/static/", http.FileServer(http.Dir("webroot/static/"))), "GetStatic")))
 	http.Handle("/websockify", wsproxy.WsProxy())
 	http.Handle("/", r)
 
-	log.Fatal(http.ListenAndServe(":" + viper.GetString("server.port"), nil))
+
+	go func() {
+		if err := http.ListenAndServeTLS(":" + viper.GetString("server.port.https"), viper.GetString("ssl.cert"), viper.GetString("ssl.key"), nil); err != nil {
+			log.Fatalln(err)
+		}
+	}();
+	if err := http.ListenAndServe(":" + viper.GetString("server.port.http"), http.HandlerFunc(server.RedirectHttps)); err != nil {
+		log.Fatalln(err)
+	}
 }
