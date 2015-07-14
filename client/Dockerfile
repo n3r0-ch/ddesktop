@@ -17,6 +17,23 @@ RUN apt-get install -y sudo net-tools lxde gtk2-engines-murrine \
 #Create ubuntu user
 RUN useradd --create-home --shell /bin/bash --user-group ubuntu
 
+#Edit startmenu and taskbar
+RUN cd /usr/share/applications && rm -f debian-uxterm.desktop \ 
+	debian-xterm.desktop gcr-prompter.desktop gcr-viewer.desktop \ 
+	gksu.desktop lxde-logout.desktop lxde-screenlock.desktop \ 
+	lxde-x-terminal-emulator.desktop openjdk-7-policytool.desktop \ 
+	python2.7.desktop python3.4.desktop x11vnc.desktop \ 
+	xscreensaver-properties.desktop
+RUN rm -f /etc/xdg/menus/lxde-applications.menu /usr/share/lxpanel/profile/LXDE/panels/panel
+ADD files/menu /etc/xdg/menus
+ADD files/taskbar /usr/share/lxpanel/profile/LXDE/panels
+
+#Set wallpaper
+USER ubuntu
+RUN mkdir -p /home/ubuntu/.config/pcmanfm/LXDE
+ADD files/pcmanfm /home/ubuntu/.config/pcmanfm/LXDE
+USER root
+
 #Add supervisor config
 ADD files/supervisor /etc/supervisor/conf.d
 
