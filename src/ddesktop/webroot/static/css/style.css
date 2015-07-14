@@ -58,3 +58,16 @@
 	font-size: 80px;
 	margin-top: 30px;
 }
+
+#vnc-wrapper{
+	height: 768px;
+	width: 1024px;
+	background-color: #555;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	color: #fff;
+	font-size: 50px;
+	line-height: 768px;
+	text-align: center;
+}

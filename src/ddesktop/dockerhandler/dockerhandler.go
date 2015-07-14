@@ -52,9 +52,15 @@ func StartContainer() string{
 	//Get name
 	name := viper.GetString("container.prefix") + uuid.String()
 
+	//Get limits
+	cpushares := int64(viper.GetInt("container.cpushares"))
+	memory := int64(viper.GetInt("container.memory") * 1024 * 1024)
+
 	//Create container
 	containerConfig := &dockerclient.ContainerConfig{
         Image: viper.GetString("container.image"),
+        Memory: memory,
+		CpuShares: cpushares,
     }
     containerId, err := client.CreateContainer(containerConfig, name)
     if err != nil {
@@ -62,7 +68,10 @@ func StartContainer() string{
     }
 
     //Start container
-    hostConfig := &dockerclient.HostConfig{}
+    hostConfig := &dockerclient.HostConfig{
+		Memory: memory,
+		CpuShares: cpushares,
+    }
     err = client.StartContainer(containerId, hostConfig)
     if err != nil {
         log.Fatal(err)
