@@ -1,20 +1,31 @@
 server:
   port:
+    #Port of webinterface (HTTP)
     http: 80
+    #Port of webinterface (HTTPS)
     https: 443
 
 container:
+  #Client Image
   image: n3r0ch/ddesktop-client
+  #Pull image on every startup (update)
   pull: true
+  #Prefix of ddesktop client containers
   prefix: dd--
+  #Port to websockify running in client container
   wsport: 6080
+  #Docker CPU share constraint
   cpushares: 256
+  #Container memomry limit in MB
   memory: 1024
 
 ssl:
+  #Path to ssl cert
   cert: /etc/ddesktop/cert.pem
+  #Path to ssl key
   key: /etc/ddesktop/key.pem
 
 htpasswd:
+  #Path to htpasswd file
   path: /etc/ddesktop/.htpasswd
 
