@@ -1,12 +1,15 @@
-<div data:ng-repeat="state in states">
-	<div ng-show="state.status == 'disconnected'">
-		<p>
-			<a class="btn btn-primary" ng-Click="reconnect()">Reconnect</a>
-		</p>
-	</div>
-</div>
+
 
 <div id="vnc-wrapper">
-	<vnc host="{{ host }}" port="{{ port }}" true-color="false" is-connected="true" id="vnc" data:states="states" data:ng-init = "states=[];">
-	</vnc>	
+	<div data:ng-repeat="state in states">
+		<div ng-show="state.status == 'disconnected'">
+			<p>
+				<a class="btn btn-primary" ng-Click="reconnect()">Reconnect</a>
+			</p>
+		</div>
+	</div>
+	<div id="vnc-connection">
+		<vnc host="{{ host }}" port="{{ port }}" true-color="false" is-connected="true" id="vnc" data:states="states" data:ng-init = "states=[];">
+		</vnc>	
+	</div>
 </div>
