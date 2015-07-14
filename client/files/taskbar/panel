@@ -65,20 +65,20 @@ Plugin {
     }
 }
 
-Plugin {
-    type = wincmd
-    Config {
-        Button1=iconify
-        Button2=shade
-    }
-}
+#Plugin {
+#    type = wincmd
+#    Config {
+#        Button1=iconify
+#        Button2=shade
+#    }
+#}
 
-Plugin {
-    type = space
-    Config {
-        Size=4
-    }
-}
+#Plugin {
+#    type = space
+#    Config {
+#        Size=4
+#    }
+#}
 
 Plugin {
     type = pager
