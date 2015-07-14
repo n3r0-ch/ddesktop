@@ -7,6 +7,8 @@ container:
   image: n3r0ch/ddesktop-client
   prefix: dd--
   wsport: 6080
+  cpushares: 256
+  memory: 1024
 
 ssl:
   cert: /etc/ddesktop/cert.pem

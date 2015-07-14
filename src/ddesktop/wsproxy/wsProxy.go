@@ -26,7 +26,7 @@ func WsProxy() http.Handler {
     			time.Sleep(1000 * time.Millisecond)
     		} else{
     			d.Close()
-    			time.Sleep(3000 * time.Millisecond)
+    			time.Sleep(250 * time.Millisecond)
     			break;
     		}
     	}
