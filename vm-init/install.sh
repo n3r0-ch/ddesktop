@@ -49,6 +49,10 @@ chmod +x /usr/local/bin/docker-compose
 #Add go to path
 echo 'export PATH=$PATH:/usr/local/go/bin:/go/bin' >> /home/vagrant/.bashrc
 
+#Pull docker images
+docker pull n3r0ch/ddesktop-client:latest
+docker pull n3r0ch/ddesktop-server:latest
+
 #Cleanup
 apt-get autoremove -y
 apt-get autoclean -y
