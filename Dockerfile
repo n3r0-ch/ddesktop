@@ -7,13 +7,15 @@ MAINTAINER Felix Imobersteg <felix.imobersteg@me.com>
 RUN apt-get update -y
 
 #Install build tools
-RUN apt-get install -y make git apache2-utils
+RUN curl -sL https://deb.nodesource.com/setup | bash -
+RUN apt-get install -y make git apache2-utils nodejs
+RUN npm install -g grunt-cli bower
 
 #Add and compile source code
 ADD . /usr/src/ddesktop
 WORKDIR /usr/src/ddesktop
-RUN rm -rf src/github.com src/gopkg.in pkg
-RUN make backend
+RUN rm -rf src/github.com src/gopkg.in src/golang.org pkg bin
+RUN make all
 WORKDIR /root
 
 #Move binary and config

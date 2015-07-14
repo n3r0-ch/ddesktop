@@ -1,3 +1,4 @@
 {
-  "directory" : "src/ddesktop/webroot/bower"
+  "directory" : "src/ddesktop/webroot/bower",
+  "interactive": false
 }

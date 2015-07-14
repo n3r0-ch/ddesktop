@@ -2,6 +2,8 @@ export GOPATH:=$(shell pwd)
 
 default: dev
 
+all: backend frontend
+
 backend: deps-backend
 	go install ddesktop/main
 	mv bin/main bin/ddesktop
@@ -16,7 +18,7 @@ deps-backend:
 	go get -d -v ddesktop/...
 
 deps-frontend:
-	bower install
+	bower install --allow-root
 
 dev: backend frontend
 	cp config.yml bin
