@@ -8,6 +8,12 @@ import (
 	"log"
 	"io"
 	"ddesktop/dockerhandler"
+	"strconv"
+)
+
+var (
+	conn net.Conn
+	err error
 )
 
 
@@ -23,22 +29,21 @@ func WsProxy() http.HandlerFunc {
 
     	//Check if port is open
     	for i := 0; i < 10; i++ {
-    		d, err := net.Dial("tcp", target)
+    		conn, err = net.Dial("tcp", target)
     		if err != nil {
+    			if i == 9 {
+    				http.Error(w, "Error contacting backend server.", 500)
+					log.Printf("Error dialing websocket backend %s: %v", target, err)
+					return
+    			}
     			time.Sleep(1000 * time.Millisecond)
     		} else{
-    			d.Close()
-    			time.Sleep(250 * time.Millisecond)
-    			break;
+    			time.Sleep(1000 * time.Millisecond)
+    			log.Println("Connected to container " + containerId + " after " + strconv.Itoa(i + 1) + " seconds.")
+				break
     		}
     	}
 
-		d, err := net.Dial("tcp", target)
-		if err != nil {
-			http.Error(w, "Error contacting backend server.", 500)
-			log.Printf("Error dialing websocket backend %s: %v", target, err)
-			return
-		}
 		hj, ok := w.(http.Hijacker)
 		if !ok {
 			http.Error(w, "Not a hijacker?", 500)
@@ -50,9 +55,9 @@ func WsProxy() http.HandlerFunc {
 			return
 		}
 		defer nc.Close()
-		defer d.Close()
+		defer conn.Close()
 
-		err = r.Write(d)
+		err = r.Write(conn)
 		if err != nil {
 			log.Printf("Error copying request to target: %v", err)
 			return
@@ -63,8 +68,8 @@ func WsProxy() http.HandlerFunc {
 			_, err := io.Copy(dst, src)
 			errc <- err
 		}
-		go cp(d, nc)
-		go cp(nc, d)
+		go cp(conn, nc)
+		go cp(nc, conn)
 		<-errc
 		log.Println("WebSocket connection closed.")
 		dockerhandler.DeleteContainer(containerId)
