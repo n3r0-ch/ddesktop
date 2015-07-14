@@ -14,3 +14,6 @@ container:
 ssl:
   cert: /etc/ddesktop/cert.pem
   key: /etc/ddesktop/key.pem
+
+htpasswd:
+  path: /etc/ddesktop/.htpasswd

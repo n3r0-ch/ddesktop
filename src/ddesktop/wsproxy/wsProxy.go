@@ -11,12 +11,14 @@ import (
 )
 
 
-func WsProxy() http.Handler {
+func WsProxy() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     	log.Println("WebSocket connection opened.")
 
+    	//Start new container
     	containerId := dockerhandler.StartContainer()
 
+    	//Get websockify target
     	target := dockerhandler.GetIP(containerId) + ":" + viper.GetString("container.wsport")
 
     	//Check if port is open

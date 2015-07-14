@@ -8,32 +8,51 @@
 
     <title>.ddesktop</title>
 
-    <link href="static/bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/bower/bootstrap-flat/css/bootstrap-flat.min.css" rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
+    <link href="bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower/bootstrap-flat/css/bootstrap-flat.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <script type="text/javascript">
+        var REST_BASE_URL = ""
+    </script>
 
   </head>
   <body>
 
-    <div ng-include src="'/static/includes/navigation.html'"></div>
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <span class="navbar-brand">.ddesktop</span>
+        </div>
+      </div>
+    </nav>
 
     <div class="container">
       <div ng-view></div>
     </div>
 
+    <footer>
+      <div class="container">
+        .ddesktop - <a target="_blank" href="https://github.com/n3r0-ch/ddesktop">Support &amp; Documentation</a> - Powered by <a target="_blank" href="https://www.docker.com/">Docker</a>
+      </div>
+    </footer>
 
     <!-- include javascripts -->
-    <script src="static/bower/jquery/dist/jquery.min.js"></script>
-    <script src="static/bower/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="static/bower/angular/angular.min.js"></script>
-    <script src="static/bower/angular-resource/angular-resource.min.js"></script>
-    <script src="static/bower/angular-route/angular-route.min.js"></script>
-    <script src="static/bower/angular-no-vnc/dist/angular-noVNC.js"></script>
-    <script src="static/js/app/app.js"></script>
-    <script src="static/js/controller/ConnectController.js"></script>
-    <script src="static/js/controller/LoginController.js"></script>
-    <script src="static/js/controller/ErrorController.js"></script>
+    <script src="bower/jquery/dist/jquery.min.js"></script>
+    <script src="bower/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower/angular/angular.min.js"></script>
+    <script src="bower/angular-route/angular-route.min.js"></script>
+    <script src="bower/angular-no-vnc/dist/angular-noVNC.min.js"></script>
+
+    <script src="js/app/app.js"></script>
+
+    <script src="js/controller/ConnectController.js"></script>
+    <script src="js/controller/LoginController.js"></script>
+    <script src="js/controller/ErrorController.js"></script>
+
+    <script src="js/service/LoginService.js"></script>
   </body>
 </html>

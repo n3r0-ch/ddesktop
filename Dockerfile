@@ -7,7 +7,7 @@ MAINTAINER Felix Imobersteg <felix.imobersteg@me.com>
 RUN apt-get update -y
 
 #Install build tools
-RUN apt-get install -y make git
+RUN apt-get install -y make git apache2-utils
 
 #Add and compile source code
 ADD . /usr/src/ddesktop
@@ -22,6 +22,9 @@ RUN mkdir -p /etc/ddesktop && cp /usr/src/ddesktop/config.yml /etc/ddesktop
 
 #Create sample SSL certificate
 RUN openssl req -new -newkey rsa:4096 -days 3652 -nodes -x509 -subj "/C=CH/ST=ddesktop/L=ddesktop/O=ddesktop/CN=ddesktop.io" -keyout /etc/ddesktop/key.pem  -out /etc/ddesktop/cert.pem 
+
+#Create passwordfile
+RUN htpasswd -cb /etc/ddesktop/.htpasswd ddesktop ddesktop
 
 #Slimming down Docker container
 RUN apt-get clean

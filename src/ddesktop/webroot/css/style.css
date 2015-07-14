@@ -12,8 +12,8 @@
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-brand:hover {
-	background-color: #fff;
-	color: #337ab7;
+	background-color: #337ab7;
+	color: #fff;
 }
 
 .navbar-inverse .navbar-collapse{
@@ -29,27 +29,23 @@
 	border-color: #fff;
 }
 
-.footer {
+footer {
 	margin-top: 30px;
-	color: #337ab7;
+	color: #888;
 }
 
-.form-signin {
-	margin-top: 30px;
-	max-width: 330px;
-	padding: 15px;
-	padding-top: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	border: 1px solid #ccc;
+footer a {
+	color: #888;
+	text-decoration: underline;
 }
 
-.form-signin .form-control {
-	margin-bottom: 10px;
+footer a:hover {
+	color: #333;
+	text-decoration: none;
 }
 
-.form-signin-heading {
-	text-align: center;
+footer .container {
+	border-top: 1px solid #888;
 }
 
 #error-page {
