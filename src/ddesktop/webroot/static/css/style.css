@@ -76,3 +76,16 @@
 	padding: 0;
 	text-align: center;
 }
+
+.container{
+	max-width: 1024px;
+	padding: 0px;
+}
+
+.container-fluid{
+	padding: 0;
+}
+
+.navbar-collapse {
+	padding: 0;
+}
