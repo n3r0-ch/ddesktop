@@ -32,7 +32,9 @@ func main() {
 	dockerhandler.CleanUp()
 
 	//Pull new docker image
-	dockerhandler.PullImage()
+	if viper.GetBool("container.pull"){
+		dockerhandler.PullImage()
+	}
 
 	//Start server
 	log.Printf("Starting server on http://0.0.0.0:" + viper.GetString("server.port.http") + " and https://0.0.0.0:" + viper.GetString("server.port.https") + "...")

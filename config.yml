@@ -5,6 +5,7 @@ server:
 
 container:
   image: n3r0ch/ddesktop-client
+  pull: true
   prefix: dd--
   wsport: 6080
   cpushares: 256
