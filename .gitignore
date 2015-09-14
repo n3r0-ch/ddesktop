@@ -6,3 +6,4 @@
 /src/gopkg.in/*
 .DS_Store
 .vagrant
+phpunit.phar
